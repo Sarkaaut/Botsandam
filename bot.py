@@ -18,7 +18,7 @@ bot = telebot.TeleBot(TELEGRAM_TOKEN, threaded=False,num_threads=55,skip_pending
 @bot.message_handler(commands=['start'])
 def Admin(message):
     AddAccount=types.InlineKeyboardButton("• ئەکاونتێک زیاد بکە •",callback_data="AddAccount")
-    Accounts=types.InlineKeyboardButton("• کۆدەکانی ئەکاونتەکەت •",callback_data="Accounts")
+    Accounts=types.InlineKeyboardButton("",callback_data="Accounts")
     a1=types.InlineKeyboardButton("• گواستنەوە ئەندامەکان •",callback_data="a1")
     inline = types.InlineKeyboardMarkup(keyboard=[[a1],[AddAccount],[Accounts]])
     bot.send_message(message.chat.id,"""*بەخێرهاتی ئازیزم  👋
@@ -34,7 +34,7 @@ def call(call):
         num = DB.accounts()
         msg=bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=f"ئەکاونتە تەواو تۆمارکراوەکانتان 📋 : {num}",parse_mode="markdown")
     if call.data =="AddAccount":
-        msg=bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text="*ئێستا ئەو ژمارەیەی دەتەوێت بیگەیەنیت بە کۆدی وڵاتەوە بنێرە*📞🎩",parse_mode="markdown")
+        msg=bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text="*ئێستا ئەو ژمارەیەی دەتەوێت بیگەیەنیت بە کۆدی وڵاتەوە بنێرە : نموونە +964 775 106 4027*📞",parse_mode="markdown")
         bot.register_next_step_handler(msg, AddAccount)
     if call.data =="a1":
         msg=bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text="*لینکی ئەو گروپە بنێرە کە دەتەوێت لێیەوە بگوازیتەوە *🖲",parse_mode="markdown")
@@ -70,7 +70,7 @@ def AddAccount(message):
             _client = Client("::memory::", in_memory=True,api_id=api_id, api_hash=api_hash,lang_code="ar")
             _client.connect()
             SendCode = _client.send_code(message.text)
-            Mas = bot.send_message(message.chat.id,"*ئەو کۆدە داخڵ بکە کە بۆت نێردراوە 🔏*",parse_mode="markdown")
+            Mas = bot.send_message(message.chat.id,"*ئەو کۆدە لێرە داخڵ بکە کە بۆت نێردراوە نموونە : 9 6 7 1 6 پیویستە بۆشای لە نێوان ژمارەکان بکەیت 🔏*",parse_mode="markdown")
             bot.register_next_step_handler(Mas, sigin_up,_client,message.text,SendCode.phone_code_hash,message.text)	
         else:
             Mas = bot.send_message(message.chat.id,"*چاوەڕێ بکە لەکاتی سکانکردندا* ⏱")
